@@ -28,7 +28,12 @@ class Wow(View):
             x in META or x.startswith('HTTP_')]
         request_data.META = OrderedDict(sorted(meta))
         context = {'request': request_data}
-        return render_to_response('wow.html', context)
+        response = render_to_response('wow.html', context)
+        # Do not use X headers
+        # http://tools.ietf.org/html/draft-ietf-appsawg-xdash-05
+        # http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Responses
+        response['Readme'] = 'https://github.com/crccheck/django-request-echo'
+        return response
 
     post = get  # TEEHEE
 
