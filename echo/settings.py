@@ -30,3 +30,6 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'echo'),
 )
 
+INSTALLED_APPS = []
+
+MIDDLEWARE_CLASSES = []
