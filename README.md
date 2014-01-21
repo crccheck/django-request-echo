@@ -10,4 +10,9 @@ I made this because I wanted a site like httpbin/postbin, but I needed lots of
 urls. It's written in Django because I needed to know how Django would deal with
 the request.
 
+## Try It
+
+http://django-request-echo.herokuapp.com/lemon-party
+
+
   [httpbin]: http://httpbin.org/
