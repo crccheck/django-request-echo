@@ -1,0 +1,24 @@
+<h2>Body</h2>
+{{ request.body }}
+<h2>Path</h2>
+{{ request.path_info }}
+<h2>Full Path</h2>
+{{ request.get_full_path }}
+<h2>Method</h2>
+{{ request.method }}
+<h2>Encoding</h2>
+{{ request.encoding }}
+<h2>META</h2>
+{% include "table_data.html" with table_data=request.META %}
+
+{% if request.GET %}
+  <h2>GET</h2>
+  {% include "table_data.html" with table_data=request.GET %}
+{% endif %}
+{% if request.POST %}
+  <h2>POST</h2>
+  {% include "table_data.html" with table_data=request.POST %}
+{% endif %}
+<h2>Cookies</h2>
+{% include "table_data.html" with table_data=request.COOKIES %}
+{{ request }}
