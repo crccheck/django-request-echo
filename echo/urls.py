@@ -1,7 +1,10 @@
+import json
+
 from collections import OrderedDict
 from copy import copy
 
 from django.conf.urls import patterns, url
+from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.views.generic import View
 
@@ -28,7 +31,26 @@ class Wow(View):
             x in META or x.startswith('HTTP_')]
         request_data.META = OrderedDict(sorted(meta))
         context = {'request': request_data}
-        response = render_to_response('wow.html', context)
+
+        # TODO check 'Accept' header
+        return_json = request.is_ajax()
+        if return_json:
+            # recreation of wow.html
+            data = dict(
+                body=request_data.body,
+                path=request_data.path_info,
+                full_path=request_data.get_full_path(),
+                method=request_data.method,
+                encoding=request.encoding,
+                META=request_data.META,
+                GET=request_data.GET,
+                POST=request_data.POST,
+                COOKIES=request_data.COOKIES,
+            )
+            response = HttpResponse(json.dumps(data),
+                    content_type='application/json')
+        else:
+            response = render_to_response('wow.html', context)
         # Do not use X headers
         # http://tools.ietf.org/html/draft-ietf-appsawg-xdash-05
         # http://en.wikipedia.org/wiki/List_of_HTTP_header_fields#Responses
