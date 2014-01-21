@@ -1,8 +1,14 @@
 <table border=1 cellspacing=0 cellpadding=3>
-  {% for k, v in table_data.items %}
+  {% if table_data %}
+    {% for k, v in table_data.items %}
+      <tr>
+        <td>{{ k }}</td>
+        <td>{{ v|default:"&nbsp;" }}</td>
+      </tr>
+    {% endfor %}
+  {% else %}
     <tr>
-      <td>{{ k }}</td>
-      <td>{{ v|default:"&nbsp;" }}</td>
+      <td><i>None</i></td>
     </tr>
-  {% endfor %}
+  {% endif %}
 </table>
