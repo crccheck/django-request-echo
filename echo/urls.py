@@ -32,7 +32,7 @@ class Wow(View):
 
     def get_fake_link(self):
         n = random.randint(1, 5)
-        out = '/'.join([self.get_fake_word() for __ in range(n)])
+        out = '/' + '/'.join([self.get_fake_word() for __ in range(n)])
         if random.randint(0, 3):
             # sometimes give a trailing slash
             out += '/'
